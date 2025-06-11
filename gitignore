@@ -192,3 +192,16 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+artifacts/*
+artifacts/
+*.pyc
+.venv/
+env/
+sentA/
+*.csv
+*.tsv
+*.zip
+
+
+
+
