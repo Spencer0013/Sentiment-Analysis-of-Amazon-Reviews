@@ -1,0 +1,14 @@
+max_tokens: 11470
+output_sequence_length: 163
+input_dim: 11470
+output_dim: 107
+batch_size: 32
+epochs: 3
+classes: 2
+learning_rate : 0.001
+input_dtype: int
+num_labels: 2
+max_length: 163
+random_state: 42
+input_shape: (163,107)
+
