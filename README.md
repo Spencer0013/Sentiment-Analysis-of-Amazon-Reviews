@@ -69,21 +69,21 @@ streamlit run app.py
 # 🔧 Configuration
 Modify parameters in params.yaml:
 
-max_tokens: 11470
-output_sequence_length: 163
-input_dim: 11470
-output_dim: 107
-batch_size: 512
-epochs: 2
-label_col: "target"
-classes: 2
-learning_rate : 0.001
-input_dtype: int
-num_labels: 2
-max_length: 163
-random_state: 42
-dropout_rate: 0.1
-dense_units: 64
+- max_tokens: 11470
+- output_sequence_length: 163
+- input_dim: 11470
+- output_dim: 107
+- batch_size: 512
+- epochs: 2
+- label_col: "target"
+- classes: 2
+- learning_rate : 0.001
+- input_dtype: int
+- num_labels: 2
+- max_length: 163
+- random_state: 42
+- dropout_rate: 0.1
+- dense_units: 64
 
 # 🚢 Deployment
 The CI/CD pipeline automatically builds and deploys to Azure on push to main:
