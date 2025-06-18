@@ -14,6 +14,5 @@ random_state: 42
 #learning_rate: 3e-5
 dropout_rate: 0.1
 dense_units: 64
-bert_preprocess_url: "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
-bert_encoder_url: "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/2"
+
 
