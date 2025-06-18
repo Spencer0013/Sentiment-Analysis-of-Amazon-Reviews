@@ -9,4 +9,4 @@ class DataPreprocessingPipeline:
         config = ConfigurationManager()
         data_preprocessing_config = config.get_preprocessing_config()
         data_preprocessor = DataPreprocessing(config=data_preprocessing_config)
-        data_preprocessor.preprocess()
+        

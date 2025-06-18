@@ -2,13 +2,18 @@ max_tokens: 11470
 output_sequence_length: 163
 input_dim: 11470
 output_dim: 107
-batch_size: 32
-epochs: 3
+batch_size: 512
+epochs: 2
+label_col: "target"
 classes: 2
 learning_rate : 0.001
 input_dtype: int
 num_labels: 2
 max_length: 163
 random_state: 42
-input_shape: (163,107)
+#learning_rate: 3e-5
+dropout_rate: 0.1
+dense_units: 64
+bert_preprocess_url: "https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3"
+bert_encoder_url: "https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/2"
 

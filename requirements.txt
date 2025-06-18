@@ -22,6 +22,7 @@ contractions
 emoji
 scikit-learn
 tensorflow_hub
+tensorflow_text
 
 -e .
 

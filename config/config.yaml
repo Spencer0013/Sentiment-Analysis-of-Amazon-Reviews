@@ -16,24 +16,17 @@ data_preprocessing:
 
 data_transformation:
   root_dir: artifacts/data_transformation
-  transformer_data: artifacts/data_transformation/transformer_data
-  data_path_train: artifacts/data_preprocessing/train_clean.csv
-  model_name : bert-base-uncased
-  data_path_test: artifacts/data_preprocessing/test_clean.csv
-  transformed_token_embedding_path: artifacts/data_transformation/token_embeddings.npy
+  data_path: artifacts/data_preprocessing
+  
 
 model_trainer:
   root_dir: artifacts/model_trainer
   data_path: artifacts/data_transformation
-  token_embed_path: artifacts/data_transformation/token_embeddings.npy
-  model_save_path: artifacts/model_trainer/model.h5
+  model_save_path: artifacts/model_trainer/sentiment_model
 
 
-model_trainer_use:
-  root_dir: artifacts/model_trainer_USE
-  data_path: artifacts/data_preprocessing
-  use_model_path: "https://tfhub.dev/google/universal-sentence-encoder/4"
-  model_save_path: artifacts/model_trainer_USE/model.h5
+
+  
 
 
 

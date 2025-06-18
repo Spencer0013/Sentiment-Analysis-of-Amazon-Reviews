@@ -21,41 +21,33 @@ class PreprocessingConfig:
 @dataclass
 class DataTransformationConfig:
     root_dir: str
-    data_path_train: str
-    data_path_test: str
-    transformed_token_embedding_path: str
+    data_path: str
+    
+
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    root_dir: Path
+    data_path: Path
+    model_save_path: Path
+    epochs:int
+    classes:int
+    learning_rate:float
+    input_dtype: int
+    params: any
+    random_state:int
     max_tokens: int
     output_sequence_length: int
     input_dim: int
     output_dim: int
     batch_size: int
+    label_col: str
 
-@dataclass(frozen=True)
-class ModelTrainerConfig:
-    root_dir: Path
-    model_save_path: Path
-    epochs:int
-    classes:int
-    learning_rate:float
-    input_shape:tuple
-    input_dtype: int
-    params: any
 
-@dataclass
-class ModelTrainerUSEConfig:
-    root_dir: Path
-    use_model_path: str
-    data_path: Path
-    classes: int
-    model_save_path: Path
-    epochs: int
-    batch_size: int
-    learning_rate: float
 
 
 @dataclass(frozen=True)
 class EvaluationConfig:
     path_of_model: Path
-    test_data: Path
+    data_path: Path
     all_params: dict
 

@@ -7,11 +7,12 @@ class ModelEvaluationPipeline:
 
     def main(self):
         config = ConfigurationManager()
-        val_config = config.get_evaluation_config()
-        evaluation = Evaluation(val_config)
+        eval_config = config.get_evaluation_config()
+        evaluation = Evaluation(eval_config)
         evaluation.load_model()
-        evaluation.load_test_dataset()
         evaluation.evaluate()
         evaluation.save_score()
+
+        
 
 

@@ -1,12 +1,11 @@
 
-import urllib.request as request
-import zipfile
+import pandas as pd
+import numpy as np
+import re, contractions, emoji
 from sentimentanalyzer.logging import logger
 from pathlib import Path
 from sentimentanalyzer.entity import PreprocessingConfig
-import pandas as pd
-from pathlib import Path
-from src.sentimentanalyzer.utils.common import convert_to_csv, preprocess_review_list, create_directories
+from src.sentimentanalyzer.utils.common import  create_directories,  get_labels_and_texts_from_txt
 
 
 class DataPreprocessing:
@@ -16,31 +15,30 @@ class DataPreprocessing:
         # Ensure output directory exists
         create_directories([Path(self.config.root_dir)])
 
-    def preprocess(self):
         ingestion_dir = Path(self.config.ingestion_dir)
-        output_dir    = Path(self.config.output_dir)
+        output_dir = Path(self.config.output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
 
-        # Find all .ft.txt files in ingestion_dir
-        txt_files = list(ingestion_dir.glob("*.ft.txt"))
-        if not txt_files:
-            logger.warning(f"No .ft.txt files found in {ingestion_dir}")
-            return
+        datasets = {
+            "train": ingestion_dir / "train.ft.txt",
+            "test": ingestion_dir / "test.ft.txt"
+        }
 
-        for txt_path in txt_files:
-            split_name = txt_path.stem.replace(".ft", "")  # e.g. 'train'
-            csv_raw_path = output_dir / f"{split_name}_raw.csv"
-            csv_cleaned  = output_dir / f"{split_name}_clean.csv"
+        for split, filepath in datasets.items():
+            if filepath.exists():
+                labels, texts = get_labels_and_texts_from_txt(filepath)
 
-            logger.info(f"Converting {txt_path.name} → {csv_raw_path.name}")
-            convert_to_csv(txt_path, csv_raw_path)
+                # Save with split in filename
+                labels_path = output_dir / f"{split}_labels.npy"
+                texts_path = output_dir / f"{split}_texts.txt"
 
-            logger.info(f"Loading {csv_raw_path.name} into DataFrame")
-            df_raw = pd.read_csv(csv_raw_path, low_memory=True)
+                np.save(labels_path, labels)
+                with open(texts_path, "w", encoding="utf-8") as f_out:
+                    for text in texts:
+                        f_out.write(text + "\n")
 
-            logger.info(f"Applying `preprocess_review_list` to {split_name}")
-            df_clean = preprocess_review_list(df_raw)
-
-            logger.info(f"Saving cleaned data to {csv_cleaned.name}")
-            df_clean.to_csv(csv_cleaned, index=False)
-
-        logger.info("Preprocessing complete.")
+                print(f"{split.capitalize()} set saved:")
+                print(f"✅ Labels -> {labels_path}")
+                print(f"✅ Texts  -> {texts_path}")
+            else:
+                print(f"⚠️ No file found for {split} at {filepath}")
